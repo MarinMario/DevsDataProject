@@ -10,7 +10,7 @@ async function home() {
         let registrationsData = JSON.parse(text)
         for(let i = 0; i < registrationsData.length; i++) {
             registrationsDiv.innerHTML += `
-                <div>name: name</div>
+                <div>name: ${registrationsData[i].name}</div>
                 <div>code: ${registrationsData[i].code}</div>
                 <div>event id: ${registrationsData[i].event_id}</div>
                 <button onclick="cancelEvent('${registrationsData[i].code}')">cancel</button>

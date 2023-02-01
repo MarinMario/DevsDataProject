@@ -22,10 +22,10 @@ def events():
     
     return json_string
 
-@app.route("/register/<id>")
-def register(id):
+@app.route("/register/<id>/<name>")
+def register(id, name):
     code = str(uuid.uuid1())
-    registration_list.append(registration.Registration(int(id), code))
+    registration_list.append(registration.Registration(int(id), code, name))
     return code
 
 @app.route("/delete/<code>")
@@ -37,6 +37,18 @@ def delete(code):
             deleted = True
 
     return str(deleted)
+
+@app.route("/edit/<code>/<name>")
+def edit_registration(code, name):
+    edited = False
+    for i in range(len(registration_list)):
+        if registration_list[i].code == code:
+            a = registration_list[i]
+            registration_list[i] = registration.Registration(a.event_id, a.code, name)
+            print(name)
+            edited = True
+
+    return str(edited)
 
 @app.route("/cancelAsManager/<code>")
 def cancel_as_manager(code):
